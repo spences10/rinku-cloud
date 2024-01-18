@@ -6,10 +6,10 @@ import { user } from './user';
 export const user_session = sqliteTable('user_session', {
 	id: text('id').primaryKey(),
 	created_at: integer('created_at', { mode: 'timestamp' }).default(
-		sql`CURRENT_TIMESTAMP`,
+		sql`(strftime('%s', 'now'))`,
 	),
-	updated_at: integer('updated_at', { mode: 'timestamp' }).default(
-		sql`CURRENT_TIMESTAMP`,
+	updated_at: integer('created_at', { mode: 'timestamp' }).default(
+		sql`(strftime('%s', 'now'))`,
 	),
 	user_id: text('user_id')
 		.notNull()

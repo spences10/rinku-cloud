@@ -6,8 +6,12 @@ export const links = sqliteTable('links', {
 	id: integer('id').primaryKey(),
 	url: text('url').unique(),
 	summary: text('summary'),
-	created: text('created').default(sql`CURRENT_TIMESTAMP`),
-	modified: text('modified').default(sql`CURRENT_TIMESTAMP`),
+	created: integer('created_at', { mode: 'timestamp' }).default(
+		sql`(strftime('%s', 'now'))`,
+	),
+	modified: integer('created_at', { mode: 'timestamp' }).default(
+		sql`(strftime('%s', 'now'))`,
+	),
 });
 
 export const insert_links_schema = createInsertSchema(links);
