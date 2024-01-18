@@ -5,7 +5,7 @@ import { tags } from './tags';
 
 export const link_tags = sqliteTable('link_tags', {
 	link_id: integer('link_id').references(() => links.id),
-	tag_id: integer('tag_id').references(() => tags.id)
+	tag_id: integer('tag_id').references(() => tags.id),
 });
 
 export const insert_link_tags_schema = createInsertSchema(link_tags);

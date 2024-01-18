@@ -8,8 +8,8 @@ async function main() {
 	const db = drizzle(
 		createClient({
 			url: process.env.DATABASE_URL || '',
-			authToken: process.env.DATABASE_AUTH_TOKEN
-		})
+			authToken: process.env.DATABASE_AUTH_TOKEN,
+		}),
 	);
 
 	console.log('Running migrations');

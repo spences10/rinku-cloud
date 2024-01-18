@@ -3,7 +3,7 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 export const tags = sqliteTable('tags', {
 	id: integer('id').primaryKey(),
-	tag: text('tag').unique()
+	tag: text('tag').unique(),
 });
 
 export const insert_tags_schema = createInsertSchema(tags);

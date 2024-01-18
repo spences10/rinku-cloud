@@ -7,7 +7,7 @@ export const links = sqliteTable('links', {
 	url: text('url').unique(),
 	summary: text('summary'),
 	created: text('created').default(sql`CURRENT_TIMESTAMP`),
-	modified: text('modified').default(sql`CURRENT_TIMESTAMP`)
+	modified: text('modified').default(sql`CURRENT_TIMESTAMP`),
 });
 
 export const insert_links_schema = createInsertSchema(links);
