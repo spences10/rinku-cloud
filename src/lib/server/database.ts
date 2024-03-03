@@ -10,3 +10,9 @@ export const client = createClient({
 });
 
 export const db = drizzle(client);
+
+export interface DatabaseUser {
+	id: string;
+	username: string;
+	password: string;
+}

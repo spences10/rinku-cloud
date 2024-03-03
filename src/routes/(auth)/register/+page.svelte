@@ -4,10 +4,6 @@
 
 <h1>Sign up</h1>
 <form method="post" use:enhance action="/register">
-	<label for="email">
-		<span>Email</span>
-		<input class="input" type="email" name="email" id="email" />
-	</label>
 	<label for="username">
 		<span>Username</span>
 		<input class="input" name="username" id="username" />

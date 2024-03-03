@@ -3,22 +3,13 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			user: import('lucia').User | null;
+			session: import('lucia').Session | null;
+		}
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
-		interface Locals {
-			auth: import('lucia').AuthRequest;
-		}
-	}
-	namespace Lucia {
-		type Auth = import('$lib/server/lucia').Auth;
-		type DatabaseUserAttributes = {
-			username: string;
-			email: string;
-		};
-		// eslint-disable-next-line @typescript-eslint/ban-types
-		type DatabaseSessionAttributes = {};
 	}
 }
 

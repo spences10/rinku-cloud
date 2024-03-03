@@ -1,11 +1,13 @@
-import { auth } from '$lib/server/lucia.js';
+import { lucia } from '$lib/server/auth';
 import { redirect } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
-export const POST = async ({ locals }) => {
-	const session = await locals.auth.validate();
-	if (session) {
-		await auth.invalidateSession(session.sessionId);
-		locals.auth.setSession(null);
+export const POST: RequestHandler = async ({ locals }) => {
+	const session_id = locals.session?.id;
+	if (typeof session_id === 'string') {
+		await lucia.invalidateSession(session_id);
+		redirect(303, '/');
+	} else {
+		redirect(303, '/');
 	}
-	throw redirect(302, '/login');
 };

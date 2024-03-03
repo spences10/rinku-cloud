@@ -1,24 +1,30 @@
-import { auth } from '$lib/server/lucia';
-import { LuciaError } from 'lucia';
+import { lucia } from '$lib/server/auth';
+import { db } from '$lib/server/database';
+import { user } from '$lib/server/schema/user';
 import { fail, redirect } from '@sveltejs/kit';
+import { eq } from 'drizzle-orm';
+import { Argon2id } from 'oslo/password';
+
 import type { Actions, PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ locals }) => {
-	const session = await locals.auth.validate();
-	if (session) throw redirect(302, '/');
+export const load: PageServerLoad = async (event) => {
+	if (event.locals.user) {
+		return redirect(302, '/');
+	}
 	return {};
 };
 
 export const actions: Actions = {
-	sign_in: async ({ request, locals }) => {
-		const formData = await request.formData();
-		const username = formData.get('username');
-		const password = formData.get('password');
-		// basic check
+	default: async (event) => {
+		const form_data = await event.request.formData();
+		const username = form_data.get('username');
+		const password = form_data.get('password');
+
 		if (
 			typeof username !== 'string' ||
-			username.length < 1 ||
-			username.length > 31
+			username.length < 3 ||
+			username.length > 31 ||
+			!/^[a-z0-9_-]+$/.test(username)
 		) {
 			return fail(400, {
 				message: 'Invalid username',
@@ -26,49 +32,41 @@ export const actions: Actions = {
 		}
 		if (
 			typeof password !== 'string' ||
-			password.length < 1 ||
+			password.length < 6 ||
 			password.length > 255
 		) {
 			return fail(400, {
 				message: 'Invalid password',
 			});
 		}
-		try {
-			// find user by key
-			// and validate password
-			const user = await auth.useKey(
-				'username',
-				username.toLowerCase(),
-				password,
-			);
-			const session = await auth.createSession({
-				userId: user.userId,
-				attributes: {},
-			});
-			locals.auth.setSession(session); // set session cookie
-		} catch (e) {
-			if (
-				e instanceof LuciaError &&
-				(e.message === 'AUTH_INVALID_KEY_ID' ||
-					e.message === 'AUTH_INVALID_PASSWORD')
-			) {
-				// user does not exist
-				// or invalid password
-				return fail(400, {
-					message: 'Incorrect username of password',
-				});
-			}
 
-			if (e) {
-				console.log(e);
-			}
-
-			return fail(500, {
-				message: 'An unknown error occurred',
+		const [existing_user] = await db
+			.select()
+			.from(user)
+			.where(eq(user.username, username));
+		if (!existing_user) {
+			return fail(400, {
+				message: 'Incorrect username or password',
 			});
 		}
-		// redirect to
-		// make sure you don't throw inside a try/catch block!
-		throw redirect(302, '/');
+
+		const valid_password = await new Argon2id().verify(
+			existing_user.password,
+			password,
+		);
+		if (!valid_password) {
+			return fail(400, {
+				message: 'Incorrect username or password',
+			});
+		}
+
+		const session = await lucia.createSession(existing_user.id, {});
+		const session_cookie = lucia.createSessionCookie(session.id);
+		event.cookies.set(session_cookie.name, session_cookie.value, {
+			path: '.',
+			...session_cookie.attributes,
+		});
+
+		return redirect(302, '/submit-dev');
 	},
 };
