@@ -2,13 +2,12 @@
 	import { browser } from '$app/environment';
 	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
-	import {
-		PUBLIC_FATHOM_ID,
-		PUBLIC_FATHOM_URL,
-	} from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import * as Fathom from 'fathom-client';
 	import type { Snippet } from 'svelte';
 	import '../app.pcss';
+
+	const { PUBLIC_FATHOM_ID, PUBLIC_FATHOM_URL } = env;
 
 	let { children } = $props<{ children: Snippet }>();
 
