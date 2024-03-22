@@ -1,11 +1,11 @@
 <script lang="ts">
-	import AddLink from '$lib/components/add-link.svelte';
+	import { enhance } from '$app/forms';
+
+	let { data } = $props();
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>
-	Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
-	documentation
-</p>
-
-<AddLink />
+<h1>Hi, {data.user.username}!</h1>
+<p>Your user ID is {data.user.id}.</p>
+<form method="post" use:enhance>
+	<button>Sign out</button>
+</form>

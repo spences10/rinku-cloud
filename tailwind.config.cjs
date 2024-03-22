@@ -6,10 +6,10 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {},
+		extend: {}
 	},
 
-	plugins: [typography, daisyui],
+	plugins: [typography, daisyui]
 };
 
 module.exports = config;
