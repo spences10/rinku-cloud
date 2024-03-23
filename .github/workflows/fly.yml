@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - run: flyctl deploy --remote-only --build-arg TURSO_DB_URL=$TURSO_DB_URL --build-arg TURSO_DB_AUTH_TOKEN=$TURSO_DB_AUTH_TOKEN
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
           TURSO_DB_URL: ${{ secrets.TURSO_DB_URL }}
