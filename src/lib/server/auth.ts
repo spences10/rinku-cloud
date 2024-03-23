@@ -1,23 +1,32 @@
-import { dev } from '$app/environment';
-import { LibSQLAdapter } from '@lucia-auth/adapter-sqlite';
 import { Lucia } from 'lucia';
-import { client } from './database';
+import { LibSQLAdapter } from '@lucia-auth/adapter-sqlite';
+import { dev } from '$app/environment';
+
+import { turso_client, type DatabaseUser } from './db';
+
+const client = turso_client();
 
 const adapter = new LibSQLAdapter(client, {
 	user: 'user',
-	session: 'user_session',
+	session: 'session'
 });
 
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
-			secure: !dev,
-		},
+			secure: !dev
+		}
 	},
+	getUserAttributes: (attributes) => {
+		return {
+			username: attributes.username
+		};
+	}
 });
 
 declare module 'lucia' {
 	interface Register {
 		Lucia: typeof lucia;
+		DatabaseUserAttributes: Omit<DatabaseUser, 'id'>;
 	}
 }
