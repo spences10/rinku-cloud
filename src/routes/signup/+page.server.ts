@@ -25,7 +25,11 @@ export const actions: Actions = {
 				message: 'Invalid username'
 			});
 		}
-		if (typeof password !== 'string' || password.length < 6 || password.length > 255) {
+		if (
+			typeof password !== 'string' ||
+			password.length < 6 ||
+			password.length > 255
+		) {
 			return fail(400, {
 				message: 'Invalid password'
 			});

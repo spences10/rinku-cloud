@@ -30,7 +30,11 @@ export const actions: Actions = {
 				message: 'Invalid username'
 			});
 		}
-		if (typeof password !== 'string' || password.length < 6 || password.length > 255) {
+		if (
+			typeof password !== 'string' ||
+			password.length < 6 ||
+			password.length > 255
+		) {
 			return fail(400, {
 				message: 'Invalid password'
 			});
@@ -62,7 +66,10 @@ export const actions: Actions = {
 		}
 
 		if (existingUser.id !== null) {
-			const session = await lucia.createSession(existingUser.id as string, {});
+			const session = await lucia.createSession(
+				existingUser.id as string,
+				{}
+			);
 			const sessionCookie = lucia.createSessionCookie(session.id);
 			event.cookies.set(sessionCookie.name, sessionCookie.value, {
 				path: '.',

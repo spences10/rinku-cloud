@@ -1,6 +1,6 @@
-import { turso_client } from "./client";
+import { turso_client } from './client';
 
-const client = turso_client()
+const client = turso_client();
 
 client.execute(`CREATE TABLE IF NOT EXISTS user (
     id TEXT NOT NULL PRIMARY KEY,
