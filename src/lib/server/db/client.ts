@@ -1,5 +1,7 @@
-import { TURSO_DB_AUTH_TOKEN, TURSO_DB_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { createClient, type Client } from '@libsql/client';
+
+const { TURSO_DB_AUTH_TOKEN, TURSO_DB_URL } = env;
 
 export const turso_client = (): Client => {
 	const url = TURSO_DB_URL?.trim();
