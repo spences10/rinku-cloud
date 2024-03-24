@@ -10,9 +10,9 @@ const client = turso_client();
 
 export const actions: Actions = {
 	default: async (event) => {
-		const formData = await event.request.formData();
-		const username = formData.get('username');
-		const password = formData.get('password');
+		const form_data = await event.request.formData();
+		const username = form_data.get('username');
+		const password = form_data.get('password');
 		// username must be between 4 ~ 31 characters, and only consists of lowercase letters, 0-9, -, and _
 		// keep in mind some database (e.g. mysql) are case insensitive
 		if (
@@ -35,21 +35,21 @@ export const actions: Actions = {
 			});
 		}
 
-		const userId = generateId(15);
-		const hashedPassword = await new Argon2id().hash(password);
+		const user_id = generateId(15);
+		const hashed_password = await new Argon2id().hash(password);
 
 		// Check if username is already used and insert if not
 		await client.execute({
 			sql: `INSERT OR IGNORE INTO user (id, username, password)
       VALUES (?, ?, ?)`,
-			args: [userId, username, hashedPassword]
+			args: [user_id, username, hashed_password]
 		});
 
-		const session = await lucia.createSession(userId, {});
-		const sessionCookie = lucia.createSessionCookie(session.id);
-		event.cookies.set(sessionCookie.name, sessionCookie.value, {
+		const session = await lucia.createSession(user_id, {});
+		const session_cookie = lucia.createSessionCookie(session.id);
+		event.cookies.set(session_cookie.name, session_cookie.value, {
 			path: '.',
-			...sessionCookie.attributes
+			...session_cookie.attributes
 		});
 
 		redirect(302, '/');

@@ -40,40 +40,40 @@ export const actions: Actions = {
 			});
 		}
 
-		const existingUserResult = await client.execute({
+		const existing_user_result = await client.execute({
 			sql: 'SELECT * FROM user WHERE username = ?',
 			args: [username]
 		});
 
 		// Check if any user was found
-		if (existingUserResult.rows.length === 0) {
+		if (existing_user_result.rows.length === 0) {
 			return fail(400, {
 				message: 'Incorrect username or password'
 			});
 		}
 
 		// Extract the first user from the rows array
-		const existingUser = existingUserResult.rows[0];
+		const existing_user = existing_user_result.rows[0];
 
-		const validPassword = await new Argon2id().verify(
-			existingUser.password as string,
+		const valid_password = await new Argon2id().verify(
+			existing_user.password as string,
 			password as string
 		);
-		if (!validPassword) {
+		if (!valid_password) {
 			return fail(400, {
 				message: 'Incorrect username or password'
 			});
 		}
 
-		if (existingUser.id !== null) {
+		if (existing_user.id !== null) {
 			const session = await lucia.createSession(
-				existingUser.id as string,
+				existing_user.id as string,
 				{}
 			);
-			const sessionCookie = lucia.createSessionCookie(session.id);
-			event.cookies.set(sessionCookie.name, sessionCookie.value, {
+			const session_cookie = lucia.createSessionCookie(session.id);
+			event.cookies.set(session_cookie.name, session_cookie.value, {
 				path: '.',
-				...sessionCookie.attributes
+				...session_cookie.attributes
 			});
 		} else {
 		}
