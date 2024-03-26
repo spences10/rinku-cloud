@@ -8,7 +8,24 @@ export const load: PageServerLoad = async (event) => {
 	if (!event.locals.user) {
 		return redirect(302, '/login');
 	}
+
+	const client = turso_client();
+
+	// Fetch the user's links
+	const links = await client.execute({
+		sql: `SELECT * FROM link WHERE user_id = ? ORDER BY created_at DESC`,
+		args: [event.locals.user.id]
+	});
+
+	// Fetch the user's tags
+	const tags = await client.execute({
+		sql: `SELECT * FROM tag WHERE user_id = ?`,
+		args: [event.locals.user.id]
+	});
+
 	return {
+		tags: tags.rows,
+		links: links.rows,
 		user: event.locals.user
 	};
 };

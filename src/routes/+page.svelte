@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import Tags from '$lib/components/tags.svelte';
 
 	let { data } = $props();
+
+	const { tags, links } = data;
 
 	let url = $state('https://scottspence.com');
 	let title = $state('thing');
@@ -30,7 +33,7 @@
 			bind:value={url}
 			type="url"
 			required
-			class="input input-bordered"
+			class="input input-primary"
 		/>
 	</div>
 	<div class="form-control">
@@ -42,8 +45,17 @@
 			bind:value={title}
 			type="text"
 			required
-			class="input input-bordered"
+			class="input input-primary"
 		/>
 	</div>
-	<button type="submit" class="btn btn-neutral">Add Link</button>
+	<div class="form-control">
+		<label for="title" class="label">
+			<span class="label-text">Tags</span>
+		</label>
+		<Tags {tags} />
+	</div>
+	<button type="submit" class="btn btn-primary">Add Link</button>
 </form>
+
+<pre>{JSON.stringify(tags, null, 2)}</pre>
+<pre>{JSON.stringify(links, null, 2)}</pre>
