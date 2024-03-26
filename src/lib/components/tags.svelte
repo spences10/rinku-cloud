@@ -10,6 +10,19 @@
 
 	let { tags }: Props = $props();
 
+	// $effect(() => {
+	// 	console.log('=====================');
+	// 	console.log(`$page.data`);
+	// 	console.log('=====================');
+	// });
+
+	// let tags = $derived.by(() => {
+	//   console.log('=====================')
+	//   console.log(`$tags_store`)
+	//   console.log('=====================')
+	// 	return $page.data.tags;
+	// });
+
 	let input_focused = $state(false);
 	let focused_index = $state(-1);
 	let search_query = $state('');

@@ -44,9 +44,14 @@ const sign_out: Action = async (event) => {
 };
 
 const add_link: Action = async ({ request, locals }) => {
+	const form_data = await request.formData();
+
+	const url = form_data.get('url') as string;
+	const title = form_data.get('title') as string;
+	const selected_tags = form_data.getAll('selected_tags') as string[];
+
 	const client = turso_client();
-	const form_data = Object.fromEntries(await request.formData());
-	const { url, title } = form_data;
+	const created_at = Date.now();
 
 	// Insert the link into the database
 	try {
@@ -55,10 +60,33 @@ const add_link: Action = async ({ request, locals }) => {
 			args: [
 				url as string,
 				title as string,
-				Date.now(),
+				created_at,
 				locals.user?.id ?? 'default_user_id'
 			]
 		});
+
+		// Retrieve the ID of the newly inserted link bc no .lastID property
+		const result = await client.execute({
+			sql: `SELECT id FROM link WHERE created_at = ? AND url = ? AND title = ? AND user_id = ?`,
+			args: [
+				created_at,
+				url,
+				title,
+				locals.user?.id ?? 'default_user_id'
+			]
+		});
+
+		// Assuming the query returns the ID of the newly inserted link
+		const link_id = result.rows[0].id;
+
+		// Insert the selected tags into the link_tag table
+		for (const tag_id of selected_tags) {
+			await client.execute({
+				sql: `INSERT INTO link_tag (link_id, tag_id) VALUES (?, ?)`,
+				args: [link_id, tag_id]
+			});
+		}
+
 		return {
 			success: true
 		};

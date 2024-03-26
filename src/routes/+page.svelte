@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import Tags from '$lib/components/tags.svelte';
+	import { selected_tags_store } from '$lib/stores.svelte';
 
 	let { data } = $props();
 
@@ -53,6 +54,12 @@
 			<span class="label-text">Tags</span>
 		</label>
 		<Tags {tags} />
+		<!-- hidden multi select with selected values added -->
+		<select multiple class="hidden" name="selected_tags">
+			{#each $selected_tags_store as item, index}
+				<option value={item.id} selected class="">{item.name}</option>
+			{/each}
+		</select>
 	</div>
 	<button type="submit" class="btn btn-primary">Add Link</button>
 </form>
