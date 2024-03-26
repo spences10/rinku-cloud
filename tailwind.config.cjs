@@ -9,6 +9,10 @@ const config = {
 		extend: {}
 	},
 
+	daisyui: {
+		themes: ['winter'],
+	},
+
 	plugins: [typography, daisyui]
 };
 
