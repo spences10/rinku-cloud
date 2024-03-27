@@ -50,6 +50,9 @@ const add_link: Action = async ({ request, locals }) => {
 	const title = form_data.get('title') as string;
 	const selected_tags = form_data.getAll('selected_tags') as string[];
 
+	console.log('=====================')
+	console.log('selected_tags:', selected_tags)
+	console.log('=====================')
 	const client = turso_client();
 	const created_at = Date.now();
 
@@ -65,9 +68,12 @@ const add_link: Action = async ({ request, locals }) => {
 			]
 		});
 
-		// Retrieve the ID of the newly inserted link bc no .lastID property
+		// Retrieve the ID of the newly inserted link
 		const result = await client.execute({
-			sql: `SELECT id FROM link WHERE created_at = ? AND url = ? AND title = ? AND user_id = ?`,
+			sql: `
+				SELECT id FROM link 
+				WHERE created_at = ? AND url = ? AND title = ? AND user_id = ?
+			`,
 			args: [
 				created_at,
 				url,
@@ -76,11 +82,33 @@ const add_link: Action = async ({ request, locals }) => {
 			]
 		});
 
-		// Assuming the query returns the ID of the newly inserted link
 		const link_id = result.rows[0].id;
 
-		// Insert the selected tags into the link_tag table
-		for (const tag_id of selected_tags) {
+		// Check if the tag already exists or insert a new one
+		for (const tag_name of selected_tags) {
+			let existing_tag = await client.execute({
+				sql: `SELECT * FROM tag WHERE name = ? AND user_id = ?`,
+				args: [tag_name, locals.user?.id ?? 'default_user_id']
+			});
+
+			let tag_id;
+			if (existing_tag.rows.length > 0) {
+				// If the tag already exists, use its ID
+				tag_id = existing_tag.rows[0].id;
+			} else {
+				// Insert the new tag and retrieve its ID
+				await client.execute({
+					sql: `INSERT INTO tag (name, user_id) VALUES (?, ?)`,
+					args: [tag_name, locals.user?.id ?? 'default_user_id']
+				});
+				const new_tag_result = await client.execute({
+					sql: `SELECT id FROM tag WHERE name = ? AND user_id = ?`,
+					args: [tag_name, locals.user?.id ?? 'default_user_id']
+				});
+				tag_id = new_tag_result.rows[0].id;
+			}
+
+			// Insert the selected tag into the link_tag table
 			await client.execute({
 				sql: `INSERT INTO link_tag (link_id, tag_id) VALUES (?, ?)`,
 				args: [link_id, tag_id]
