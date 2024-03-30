@@ -1,4 +1,3 @@
-import { lucia } from '$lib/server/auth';
 import { turso_client } from '$lib/server/db';
 import { fail, redirect } from '@sveltejs/kit';
 
@@ -23,19 +22,6 @@ export const load: PageServerLoad = async (event) => {
 	};
 };
 
-const sign_out: Action = async (event) => {
-	if (!event.locals.session) {
-		return fail(401);
-	}
-	await lucia.invalidateSession(event.locals.session.id);
-	const session_cookie = lucia.createBlankSessionCookie();
-	event.cookies.set(session_cookie.name, session_cookie.value, {
-		path: '.',
-		...session_cookie.attributes
-	});
-	return redirect(302, '/login');
-};
-
 const add_link: Action = async ({ request, locals }) => {
 	const form_data = await request.formData();
 
@@ -43,9 +29,6 @@ const add_link: Action = async ({ request, locals }) => {
 	const title = form_data.get('title') as string;
 	const selected_tags = form_data.getAll('selected_tags') as string[];
 
-	console.log('=====================');
-	console.log('selected_tags:', selected_tags);
-	console.log('=====================');
 	const client = turso_client();
 	const created_at = Date.now();
 
@@ -117,4 +100,4 @@ const add_link: Action = async ({ request, locals }) => {
 	}
 };
 
-export const actions: Actions = { sign_out, add_link };
+export const actions: Actions = { add_link };

@@ -8,7 +8,9 @@ declare global {
 			session: import('lucia').Session | null;
 		}
 		// interface PageData {}
-		// interface PageState {}
+		interface PageState {
+			selected: any;
+		}
 		// interface Platform {}
 	}
 }

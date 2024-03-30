@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto, preloadData, pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import type { Row } from '@libsql/client';
+	import Modal from '../components/modal.svelte';
+	import AddLink from './add-link/+page.svelte';
 
 	let { data } = $props();
 
@@ -30,7 +34,41 @@
 						.includes(search_query))
 		);
 	});
+
+	const show_modal = async () => {
+		// get url
+		const href = '/add-link';
+
+		// get result of load function
+		const result = await preloadData(href);
+
+		// Type guard to check if the result is of type "loaded"
+		if (result.type === 'loaded') {
+			const dataToPush = {
+				tags: result.data.tags,
+				user: result.data.user,
+			};
+			// create history entry
+			pushState(href, { selected: dataToPush });
+			modal.showModal();
+		} else {
+			goto(href);
+		}
+	};
+
+	let modal = $state() as HTMLDialogElement;
+
+	const close_modal = () => {
+		history.back();
+		modal.close();
+	};
 </script>
+
+<Modal bind:modal on:close={close_modal}>
+	{#if $page.state.selected}
+		<AddLink data={$page.state.selected} />
+	{/if}
+</Modal>
 
 <h1>Hi, {data.user.username}!</h1>
 
@@ -41,7 +79,11 @@
 </form>
 
 <div class="flex justify-center">
-	<a href="/add-link" class="btn btn-primary mb-20 shadow-lg">
+	<a
+		href="/add-link"
+		class="btn btn-primary mb-20 shadow-lg"
+		on:click|preventDefault={show_modal}
+	>
 		✨ Add a link ✨
 	</a>
 </div>

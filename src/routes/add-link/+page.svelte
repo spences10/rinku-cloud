@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { ActionResult } from '@sveltejs/kit';
 	import { writable } from 'svelte/store';
 
 	let { data } = $props();
 
 	const { tags } = data;
 
-	export const selected_tags_store = writable<
+	const selected_tags_store = writable<
 		{ id: number; name: string }[]
 	>([]);
 
-	let url = $state('https://scottspence.com');
-	let title = $state('thing');
+	let url = $state('');
+	let title = $state('');
 
 	let input_focused = $state(false);
 	let focused_index = $state(-1);
@@ -59,12 +60,35 @@
 		selected_items = selected_items.filter((item) => item.id !== id);
 		$selected_tags_store = selected_items;
 	};
+
+	const handle_result = (
+		result: ActionResult<
+			Record<string, unknown> | undefined,
+			Record<string, unknown> | undefined
+		>
+	) => {
+		if (result.type === 'error') {
+			console.error(result.error);
+		}
+		// I hate this! but couldn't work out a better way to do it!!
+		const modal_element = document.getElementById(
+			'add_link_modal'
+		) as HTMLDialogElement;
+		if (modal_element) {
+			modal_element.close();
+		}
+	};
 </script>
 
 <form
 	method="POST"
 	action="?/add_link"
-	use:enhance
+	use:enhance={() => {
+		return ({ update, result }) => {
+			handle_result(result);
+			update({ reset: true });
+		};
+	}}
 	class="flex max-w-xl flex-col justify-center gap-4 px-10 py-10 lg:px-16"
 >
 	<div class="form-control">
