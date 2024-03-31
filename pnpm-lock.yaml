@@ -60,7 +60,7 @@ devDependencies:
     version: 9.1.0(eslint@8.57.0)
   eslint-plugin-svelte:
     specifier: ^2.36.0-next.4
-    version: 2.36.0-next.12(eslint@8.57.0)(svelte@5.0.0-next.90)
+    version: 2.36.0-next.13(eslint@8.57.0)(svelte@5.0.0-next.90)
   lucia:
     specifier: ^3.1.1
     version: 3.1.1
@@ -129,8 +129,8 @@ packages:
     dev: false
     optional: true
 
-  /@emnapi/core@1.1.0:
-    resolution: {integrity: sha512-gNEVZo0HhUfVjhr6rFG//HZXbauclxueiDxaKGBZHcK5h8i9pslABNPfG8kMwYTubAn3mV7AyOZN8gfPRgbU8A==}
+  /@emnapi/core@1.1.1:
+    resolution: {integrity: sha512-eu4KjHfXg3I+UUR7vSuwZXpRo4c8h4Rtb5Lu2F7Z4JqJFl/eidquONEBiRs6viXKpWBC3BaJBy68xGJ2j56idw==}
     requiresBuild: true
     dependencies:
       tslib: 2.6.2
@@ -145,8 +145,8 @@ packages:
     dev: false
     optional: true
 
-  /@emnapi/runtime@1.1.0:
-    resolution: {integrity: sha512-gCGlE0fJGWalfy+wbFApjhKn6uoSVvopru77IPyxNKkjkaiSx2HxDS7eOYSmo9dcMIhmmIvoxiC3N9TM1c3EaA==}
+  /@emnapi/runtime@1.1.1:
+    resolution: {integrity: sha512-3bfqkzuR1KLx57nZfjr2NLnFOobvyS0aTszaEGCGqmYMVDRaGvgIZbjGSV/MHSSmLgQ/b9JFHQ5xm5WRZYd+XQ==}
     requiresBuild: true
     dependencies:
       tslib: 2.6.2
@@ -593,8 +593,8 @@ packages:
     resolution: {integrity: sha512-8JuczewTFIZ/XIjHQ+YlQUydHvlKx2hkcxtuGwh+t/t5zWyZct6YG4+xjHcq8xyc/e7FmFwf42Zj2YgICwmlvA==}
     requiresBuild: true
     dependencies:
-      '@emnapi/core': 1.1.0
-      '@emnapi/runtime': 1.1.0
+      '@emnapi/core': 1.1.1
+      '@emnapi/runtime': 1.1.1
       '@tybys/wasm-util': 0.8.1
     dev: true
     optional: true
@@ -2348,8 +2348,8 @@ packages:
       eslint: 8.57.0
     dev: true
 
-  /eslint-plugin-svelte@2.36.0-next.12(eslint@8.57.0)(svelte@5.0.0-next.90):
-    resolution: {integrity: sha512-aRWZF+vLmRjbka4bCI/HqlHCMXdqdTZk2Lwvbdwv43ZQ4XtB7fqjnGrrSXAEMCzi6hXnGKRN4yjtJhLUgXZyww==}
+  /eslint-plugin-svelte@2.36.0-next.13(eslint@8.57.0)(svelte@5.0.0-next.90):
+    resolution: {integrity: sha512-N4bLGdFkGbbAQiKvX17kLfBgnZ+Em00khOY3AReppO7fkP9jaSxwjdgTCcWf+Q5/uZWor58g4GleRqHcb2Dk2w==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0-0 || ^9.0.0-0
