@@ -49,10 +49,6 @@
 	"type": "module",
 	"dependencies": {
 		"@libsql/client": "^0.6.0",
-<<<<<<< HEAD
-		"oslo": "^1.1.3"
-=======
 		"oslo": "^1.2.0"
->>>>>>> f5eaa45 (chore: :arrow_up: update deps)
 	}
 }
