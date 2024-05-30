@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@libsql/client':
     specifier: ^0.6.0
-    version: 0.6.0
+    version: 0.6.1
   oslo:
     specifier: ^1.2.0
     version: 1.2.0
@@ -18,7 +18,7 @@ devDependencies:
     version: 0.5.7
   '@lucia-auth/adapter-sqlite':
     specifier: ^3.0.1
-    version: 3.0.1(@libsql/client@0.6.0)(lucia@3.2.0)
+    version: 3.0.1(@libsql/client@0.6.1)(lucia@3.2.0)
   '@playwright/test':
     specifier: ^1.43.1
     version: 1.44.1
@@ -460,10 +460,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@libsql/client@0.6.0:
-    resolution: {integrity: sha512-qhQzTG/y2IEVbL3+9PULDvlQFWJ/RnjFXECr/Nc3nRngGiiMysDaOV5VUzYk7DulUX98EA4wi+z3FspKrUplUA==}
+  /@libsql/client@0.6.1:
+    resolution: {integrity: sha512-j32pZMzsuKJ8bWi0rtlszrexXV7mXSxoSA/2C6DfIL7kelI7SHsFgscrQD3wHBJVguitwMklWBe2EuMMRW0img==}
     dependencies:
-      '@libsql/core': 0.6.0
+      '@libsql/core': 0.6.1
       '@libsql/hrana-client': 0.6.0
       js-base64: 3.7.7
       libsql: 0.3.18
@@ -471,8 +471,8 @@ packages:
       - bufferutil
       - utf-8-validate
 
-  /@libsql/core@0.6.0:
-    resolution: {integrity: sha512-affAB8vSqQwqI9NBDJ5uJCVaHoOAS2pOpbv1kWConh1SBbmJBnHHd4KG73RAJ2sgd2+NbT9WA+XJBqxgp28YSw==}
+  /@libsql/core@0.6.1:
+    resolution: {integrity: sha512-xVV7w4iQcWgkhvmcJ6RZQdImlNvJGIW4Tlx1KJVWh6+l1sdAAz8hNXEXO04rYGAg6oeIXZF1j1E/AW1mwomO1g==}
     dependencies:
       js-base64: 3.7.7
 
@@ -548,7 +548,7 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@lucia-auth/adapter-sqlite@3.0.1(@libsql/client@0.6.0)(lucia@3.2.0):
+  /@lucia-auth/adapter-sqlite@3.0.1(@libsql/client@0.6.1)(lucia@3.2.0):
     resolution: {integrity: sha512-bzr8+HALrbiYMb/+oL1SAnjbgFqlPs/Kj4lO57t/VvbXzmbpQEKk5Nv6hMpvWSkGAR9LbxYeQAtecikpKZVB0w==}
     peerDependencies:
       '@libsql/client': ^0.3.0
@@ -560,7 +560,7 @@ packages:
       better-sqlite3:
         optional: true
     dependencies:
-      '@libsql/client': 0.6.0
+      '@libsql/client': 0.6.1
       lucia: 3.2.0
     dev: true
 
@@ -1186,8 +1186,8 @@ packages:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
 
-  /@types/node@20.12.7:
-    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+  /@types/node@20.12.13:
+    resolution: {integrity: sha512-gBGeanV41c1L171rR7wjbMiEpEI/l5XFQdLLfhr/REwpgDy/4U8y89+i8kRiLzDyZdOkXh+cRaTetUnCYutoXA==}
     dependencies:
       undici-types: 5.26.5
 
@@ -1202,7 +1202,7 @@ packages:
   /@types/ws@8.5.10:
     resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.12.13
 
   /@typescript-eslint/eslint-plugin@7.10.0(@typescript-eslint/parser@7.10.0)(eslint@9.3.0)(typescript@5.4.5):
     resolution: {integrity: sha512-PzCr+a/KAef5ZawX7nbyNwBDtM1HdLIT53aSA2DDlxmxMngZ43O8SIePOeX8H5S+FHXeI6t97mTt/dDdzY4Fyw==}
