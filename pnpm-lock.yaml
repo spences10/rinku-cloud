@@ -84,7 +84,7 @@ devDependencies:
     version: 5.0.0-next.153
   svelte-check:
     specifier: ^3.7.1
-    version: 3.7.1(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.153)
+    version: 3.8.0(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.153)
   tailwindcss:
     specifier: ^3.4.3
     version: 3.4.4
@@ -3269,6 +3269,7 @@ packages:
 
   /rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
     dependencies:
       glob: 7.2.3
@@ -3501,8 +3502,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-check@3.7.1(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.153):
-    resolution: {integrity: sha512-U4uJoLCzmz2o2U33c7mPDJNhRYX/DNFV11XTUDlFxaKLsO7P+40gvJHMPpoRfa24jqZfST4/G9fGNcUGMO8NAQ==}
+  /svelte-check@3.8.0(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.153):
+    resolution: {integrity: sha512-7Nxn+3X97oIvMzYJ7t27w00qUf1Y52irE2RU2dQAd5PyvfGp4E7NLhFKVhb6PV2fx7dCRMpNKDIuazmGthjpSQ==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
@@ -3511,7 +3512,7 @@ packages:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       import-fresh: 3.3.0
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       sade: 1.8.1
       svelte: 5.0.0-next.153
       svelte-preprocess: 5.1.4(postcss-load-config@6.0.0)(postcss@8.4.38)(svelte@5.0.0-next.153)(typescript@5.4.5)
