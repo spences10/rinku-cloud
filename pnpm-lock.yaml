@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@libsql/client':
-    specifier: ^0.6.0
-    version: 0.6.2
+    specifier: ^0.7.0
+    version: 0.7.0
   oslo:
     specifier: ^1.2.0
     version: 1.2.0
@@ -18,7 +18,7 @@ devDependencies:
     version: 0.5.7
   '@lucia-auth/adapter-sqlite':
     specifier: ^3.0.1
-    version: 3.0.1(@libsql/client@0.6.2)(lucia@3.2.0)
+    version: 3.0.1(@libsql/client@0.7.0)(lucia@3.2.0)
   '@playwright/test':
     specifier: ^1.43.1
     version: 1.44.1
@@ -461,19 +461,20 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@libsql/client@0.6.2:
-    resolution: {integrity: sha512-xRNfRLv/dOCbV4qd+M0baQwGmvuZpMd2wG2UAPs8XmcdaPvu5ErkcaeITkxlm3hDEJVabQM1cFhMBxsugWW9fQ==}
+  /@libsql/client@0.7.0:
+    resolution: {integrity: sha512-1aLDtWzsErr68GZ640TVyOLkL/+lB2YK8cYvJIfiI7Mt+DEPB22Jkoz2QfBDg5PVGX/efeRHog2j/oVbUhxO8Q==}
     dependencies:
-      '@libsql/core': 0.6.2
+      '@libsql/core': 0.7.0
       '@libsql/hrana-client': 0.6.0
       js-base64: 3.7.7
       libsql: 0.3.18
+      promise-limit: 2.7.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  /@libsql/core@0.6.2:
-    resolution: {integrity: sha512-c2P4M+4u/4b2L02A0KjggO3UW51rGkhxr/7fzJO0fEAqsqrWGxuNj2YtRkina/oxfYvAof6xjp8RucNoIV/Odw==}
+  /@libsql/core@0.7.0:
+    resolution: {integrity: sha512-hCYfXa0S4t9CJtxZIWacboylrcx94ZQO0dEngH4f0f/LHg6ymHSZiubbojAwD7tNy94ahICoGPjEi6aEIyhlcQ==}
     dependencies:
       js-base64: 3.7.7
 
@@ -549,7 +550,7 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@lucia-auth/adapter-sqlite@3.0.1(@libsql/client@0.6.2)(lucia@3.2.0):
+  /@lucia-auth/adapter-sqlite@3.0.1(@libsql/client@0.7.0)(lucia@3.2.0):
     resolution: {integrity: sha512-bzr8+HALrbiYMb/+oL1SAnjbgFqlPs/Kj4lO57t/VvbXzmbpQEKk5Nv6hMpvWSkGAR9LbxYeQAtecikpKZVB0w==}
     peerDependencies:
       '@libsql/client': ^0.3.0
@@ -561,7 +562,7 @@ packages:
       better-sqlite3:
         optional: true
     dependencies:
-      '@libsql/client': 0.6.2
+      '@libsql/client': 0.7.0
       lucia: 3.2.0
     dev: true
 
@@ -3072,6 +3073,9 @@ packages:
       ansi-styles: 5.2.0
       react-is: 18.3.1
     dev: true
+
+  /promise-limit@2.7.0:
+    resolution: {integrity: sha512-7nJ6v5lnJsXwGprnGXga4wx6d1POjvi5Qmf1ivTRxTjH4Z/9Czja/UCMLVmB9N93GeWOU93XaFaEt6jbuoagNw==}
 
   /punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
