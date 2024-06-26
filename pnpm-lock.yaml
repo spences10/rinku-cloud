@@ -10,7 +10,7 @@ dependencies:
     version: 0.6.2
   oslo:
     specifier: ^1.2.0
-    version: 1.2.0
+    version: 1.2.1
 
 devDependencies:
   '@flydotio/dockerfile':
@@ -2731,6 +2731,14 @@ packages:
     dependencies:
       '@node-rs/argon2': 1.7.0
       '@node-rs/bcrypt': 1.9.0
+    dev: true
+
+  /oslo@1.2.1:
+    resolution: {integrity: sha512-HfIhB5ruTdQv0XX2XlncWQiJ5SIHZ7NHZhVyHth0CSZ/xzge00etRyYy/3wp/Dsu+PkxMC+6+B2lS/GcKoewkA==}
+    dependencies:
+      '@node-rs/argon2': 1.7.0
+      '@node-rs/bcrypt': 1.9.0
+    dev: false
 
   /p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
