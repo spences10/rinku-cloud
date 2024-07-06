@@ -182,7 +182,10 @@
 							)
 								? 'bg-secondary text-secondary-content'
 								: ''}"
-							onclick={() => add_tag(tag as unknown as { id: number; name: string })}
+							onclick={() =>
+								add_tag(
+									tag as unknown as { id: number; name: string }
+								)}
 							tabindex={index === focused_index ? 0 : -1}
 						>
 							{tag.name}
