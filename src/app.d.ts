@@ -1,18 +1,21 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
+
+import type Pocketbase from 'pocketbase';
+import type { User } from 'pocketbase';
+
 declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			user: import('lucia').User | null;
-			session: import('lucia').Session | null;
+			pb: Pocketbase;
+			user: User | null;
 		}
 		// interface PageData {}
-		interface PageState {
-			selected: any;
-		}
+		// interface PageState {}
 		// interface Platform {}
 	}
 }
 
-export {};
+export { };
+

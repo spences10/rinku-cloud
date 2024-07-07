@@ -4,8 +4,8 @@
 	const { form } = $props();
 </script>
 
-<h1>Sign in</h1>
-<p>Or <a href="/signup">sign up</a> for an account</p>
+<h1>Password Reset</h1>
+<p>Or <a href="/login">sign in</a> to your account</p>
 <form
 	method="POST"
 	use:enhance
@@ -24,22 +24,9 @@
 		/>
 	</div>
 
-	<div class="form-control">
-		<label for="password" class="label">
-			<span class="label-text">Password</span>
-		</label>
-		<input
-			type="password"
-			placeholder="🤫"
-			name="password"
-			id="password"
-			class="input input-bordered"
-		/>
-	</div>
-
-	<p>Forgot your password? <a href="/reset">Reset it</a></p>
-	{#if form?.notVerified}
-		<div role="alert" class="alert alert-error">
+	<button type="submit" class="btn btn-neutral">Request Reset</button>
+	{#if form?.success}
+		<div role="alert" class="alert alert-success">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-6 w-6 shrink-0 stroke-current"
@@ -50,11 +37,10 @@
 					stroke-linecap="round"
 					stroke-linejoin="round"
 					stroke-width="2"
-					d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+					d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
 				/>
 			</svg>
-			<span>Verify your email address before signing in.</span>
+			<span>Email sent to reset your password.</span>
 		</div>
 	{/if}
-	<button type="submit" class="btn btn-neutral">Sign in</button>
 </form>

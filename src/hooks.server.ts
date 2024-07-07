@@ -1,30 +1,33 @@
-import { lucia } from '$lib/server/auth';
+import { PUBLIC_DATABASE_URL } from '$env/static/public';
+import Pocketbase from 'pocketbase';
+
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const sessionId = event.cookies.get(lucia.sessionCookieName);
-	if (!sessionId) {
-		event.locals.user = null;
-		event.locals.session = null;
-		return resolve(event);
+	event.locals.pb = new Pocketbase(PUBLIC_DATABASE_URL);
+	event.locals.pb.authStore.loadFromCookie(
+		event.request.headers.get('cookie') || ''
+	);
+
+	try {
+		if (event.locals.pb.authStore.isValid) {
+			await event.locals.pb.collection('users').authRefresh();
+      event.locals.user = event.locals.pb.authStore.model;
+			// event.locals.user = serializedNonPOJOs(
+			// 	event.locals.pb.authStore.model
+			// ) as User;
+		}
+	} catch (err) {
+		event.locals.pb.authStore.clear();
+		event.locals.user = undefined;
 	}
 
-	const { session, user } = await lucia.validateSession(sessionId);
-	if (session && session.fresh) {
-		const sessionCookie = lucia.createSessionCookie(session.id);
-		event.cookies.set(sessionCookie.name, sessionCookie.value, {
-			path: '.',
-			...sessionCookie.attributes
-		});
-	}
-	if (!session) {
-		const sessionCookie = lucia.createBlankSessionCookie();
-		event.cookies.set(sessionCookie.name, sessionCookie.value, {
-			path: '.',
-			...sessionCookie.attributes
-		});
-	}
-	event.locals.user = user;
-	event.locals.session = session;
-	return resolve(event);
+	const response = await resolve(event);
+
+	response.headers.set(
+		'Set-Cookie',
+		event.locals.pb.authStore.exportToCookie({ secure: true })
+	);
+
+	return response;
 };
