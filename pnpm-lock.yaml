@@ -41,6 +41,9 @@ devDependencies:
   globals:
     specifier: ^15.8.0
     version: 15.8.0
+  pocketbase:
+    specifier: ^0.21.3
+    version: 0.21.3
   postcss:
     specifier: ^8.4.38
     version: 8.4.39
@@ -2153,6 +2156,10 @@ packages:
       playwright-core: 1.45.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
+
+  /pocketbase@0.21.3:
+    resolution: {integrity: sha512-bsQRZ1mj4dhPJ4P5iSrDqWQtBX2NtuBkf6IOZwTv27zZOw6zrISgo963i5JD/99qKKD5aMSMDPGk1BE9ZyI7Cg==}
     dev: true
 
   /postcss-import@15.1.0(postcss@8.4.39):

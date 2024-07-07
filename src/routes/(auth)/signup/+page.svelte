@@ -3,6 +3,7 @@
 </script>
 
 <h1>Sign up</h1>
+<p>Or <a href="/login">sign in</a> to your account</p>
 <form
 	method="POST"
 	use:enhance
@@ -14,23 +15,64 @@
 		</label>
 		<input
 			type="text"
-			placeholder=""
+			placeholder="username"
 			name="username"
 			id="username"
 			class="input input-bordered"
 		/>
 	</div>
+
+	<div class="form-control">
+		<label for="email" class="label">
+			<span class="label-text">Email</span>
+		</label>
+		<input
+			type="email"
+			placeholder="me@example.com"
+			name="email"
+			id="email"
+			class="input input-bordered"
+		/>
+	</div>
+
 	<div class="form-control">
 		<label for="password" class="label">
 			<span class="label-text">Password</span>
 		</label>
 		<input
 			type="password"
-			placeholder=""
+			placeholder="🤫"
 			name="password"
 			id="password"
 			class="input input-bordered"
 		/>
 	</div>
+
+	<div class="form-control">
+		<label for="passwordConfirm" class="label">
+			<span class="label-text">Password Confirm</span>
+		</label>
+		<input
+			type="passwordConfirm"
+			placeholder=""
+			name="passwordConfirm"
+			id="passwordConfirm"
+			class="input input-bordered"
+		/>
+	</div>
+
+	<div class="form-control">
+		<label for="name" class="label">
+			<span class="label-text">Your Name</span>
+		</label>
+		<input
+			type="name"
+			placeholder=""
+			name="name"
+			id="name"
+			class="input input-bordered"
+		/>
+	</div>
+
 	<button type="submit" class="btn btn-neutral">Continue</button>
 </form>
