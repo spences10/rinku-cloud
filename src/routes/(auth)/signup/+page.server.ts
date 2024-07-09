@@ -12,9 +12,7 @@ export const actions: Actions = {
 				.collection('users')
 				.requestVerification(body.email as string);
 		} catch (err) {
-			console.log('=====================');
 			console.log(err);
-			console.log('=====================');
 			error(500, 'something went wrong');
 		}
 

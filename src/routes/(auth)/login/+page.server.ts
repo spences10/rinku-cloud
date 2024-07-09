@@ -15,9 +15,7 @@ export const actions: Actions = {
         }
       }
 		} catch (err) {
-			console.log('=====================');
 			console.log(err);
-			console.log('=====================');
 			error(500, 'something went wrong');
 		}
 
