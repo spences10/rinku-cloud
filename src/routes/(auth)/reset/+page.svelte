@@ -6,7 +6,9 @@
 </script>
 
 <h1>Password Reset</h1>
-<p>Or <a href="/login">sign in</a> to your account</p>
+<p>
+	Or <a href="/login" class="link link-primary">sign in</a> to your account
+</p>
 <form
 	method="POST"
 	use:enhance

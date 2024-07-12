@@ -6,7 +6,9 @@
 </script>
 
 <h1>Sign in</h1>
-<p>Or <a href="/signup">sign up</a> for an account</p>
+<p>
+	Or <a href="/signup" class="link link-primary">sign up</a> for an account
+</p>
 <form
 	method="POST"
 	use:enhance
@@ -38,7 +40,11 @@
 		/>
 	</div>
 
-	<p>Forgot your password? <a href="/reset">Reset it</a></p>
+	<p>
+		Forgot your password? <a href="/reset" class="link link-primary"
+			>Reset it</a
+		>
+	</p>
 	{#if form?.notVerified}
 		<div role="alert" class="alert alert-error">
 			<Error />
