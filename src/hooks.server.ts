@@ -5,6 +5,7 @@ import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.pb = new Pocketbase(PUBLIC_DATABASE_URL);
+
 	event.locals.pb.authStore.loadFromCookie(
 		event.request.headers.get('cookie') || ''
 	);
@@ -12,12 +13,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	try {
 		if (event.locals.pb.authStore.isValid) {
 			await event.locals.pb.collection('users').authRefresh();
-      event.locals.user = event.locals.pb.authStore.model;
+			event.locals.user = event.locals.pb.authStore.model;
 			// event.locals.user = serializedNonPOJOs(
 			// 	event.locals.pb.authStore.model
 			// ) as User;
 		}
-	} catch (err) {
+	} catch (_) {
 		event.locals.pb.authStore.clear();
 		event.locals.user = undefined;
 	}

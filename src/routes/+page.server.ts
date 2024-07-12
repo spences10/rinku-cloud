@@ -12,6 +12,7 @@ export const load = async ({ locals }) => {
 				.getFullList(undefined, {
 					filter: `user.id = "${user_id}"`,
 					// expand: 'user',
+					expand: 'tags',
 				});
 
 			return links;
