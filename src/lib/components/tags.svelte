@@ -2,17 +2,7 @@
  This code is adapted from https://github.com/agustinl/svelte-tags-input/blob/master/src/Tags.svelte
 -->
 <script lang="ts">
-	import type { TagResponse } from '$lib/types';
-
-	// New type for tags that haven't been saved to the database yet
-	type NewTag = {
-		id: string;
-		name: string;
-		isNew: true;
-	};
-
-	// Union type for tags that can be either existing or new
-	type Tag = TagResponse | NewTag;
+	import type { NewTag, Tag, TagResponse } from '$lib/types';
 
 	interface Props {
 		existing_tags: TagResponse[];

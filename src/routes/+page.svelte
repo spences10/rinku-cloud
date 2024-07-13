@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { Input, Link, Tags } from '$lib/components';
 
-	import type { LinkResponse, TagResponse } from '$lib/types';
+	import type { LinkResponse, Tag, TagResponse } from '$lib/types';
 
 	interface ExpandedLinkResponse extends LinkResponse {
 		expand: {
@@ -17,9 +17,9 @@
 
 	const { data, form } = $props<{ data: PageData; form: any }>();
 
-	let selected_tags = $state<TagResponse[]>([]);
+	let selected_tags = $state<Tag[]>([]);
 
-	const handle_tags_change = (tags: TagResponse[]) => {
+	const handle_tags_change = (tags: Tag[]) => {
 		selected_tags = tags;
 		console.log('Selected tags:', tags);
 	};
