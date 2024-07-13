@@ -50,11 +50,9 @@ const add_link: Action = async ({ request, locals }) => {
 	const form_data = await request.formData();
 	const url = form_data.get('url') as string;
 	const title = form_data.get('title') as string;
-	const tags =
-		(form_data.get('tags') as string)
-			?.split(',')
-			.map((tag) => tag.trim())
-			.filter(Boolean) || [];
+	const tags = form_data.get('tags') as string;
+
+	console.log('Received form data:', { url, title, tags });
 
 	const errors: Record<string, string> = {};
 
@@ -73,35 +71,60 @@ const add_link: Action = async ({ request, locals }) => {
 			user: locals.user.id,
 		});
 
-		// Create or get tags and create link_tag relationships
-		const tag_ids = [];
-		for (const tag_name of tags) {
-			let tag_obj;
+		console.log('Created link:', link);
+
+		// Handle tags
+		const tag_data = tags ? tags.split(',') : [];
+		console.log('Received tag data:', tag_data);
+
+		const final_tag_ids = [];
+
+		for (const tag_item of tag_data) {
 			try {
-				tag_obj = await locals.pb
-					.collection('tag')
-					.getFirstListItem(
-						`name="${tag_name}" && user="${locals.user.id}"`
+				let tag;
+				if (tag_item.startsWith('existing:')) {
+					// This is an existing tag, extract the ID
+					const tag_id = tag_item.split(':')[1];
+					tag = await locals.pb.collection('tag').getOne(tag_id);
+					console.log('Found existing tag:', tag);
+				} else if (tag_item.startsWith('new:')) {
+					// This is a new tag, create it
+					const tag_name = tag_item.split(':')[1];
+					tag = await locals.pb.collection('tag').create({
+						name: tag_name,
+						user: locals.user.id,
+					});
+					console.log('Created new tag:', tag);
+				} else {
+					console.error(`Invalid tag format: ${tag_item}`);
+					continue;
+				}
+
+				if (tag) {
+					final_tag_ids.push(tag.id);
+
+					// Create link_tag relationship
+					await locals.pb.collection('link_tag').create({
+						link_id: link.id,
+						tag_id: tag.id,
+					});
+					console.log(
+						`Created link_tag relationship for tag ${tag.id}`
 					);
-			} catch {
-				tag_obj = await locals.pb.collection('tag').create({
-					name: tag_name,
-					user: locals.user.id,
-				});
+				}
+			} catch (err) {
+				console.error(`Error processing tag ${tag_item}:`, err);
 			}
-
-			tag_ids.push(tag_obj.id);
-
-			// Create link_tag relationship
-			await locals.pb.collection('link_tag').create({
-				link_id: link.id,
-				tag_id: tag_obj.id,
-			});
 		}
 
 		// Update the link with the tag relations
 		await locals.pb.collection('link').update(link.id, {
-			tags: tag_ids,
+			tags: final_tag_ids,
+		});
+
+		console.log('Updated link with tags:', {
+			link_id: link.id,
+			tags: final_tag_ids,
 		});
 
 		return { success: true };

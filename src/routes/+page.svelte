@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Input, Link } from '$lib/components';
+	import { Input, Link, Tags } from '$lib/components';
 
-	import type {
-		LinkResponse,
-		TagResponse,
-	} from '$lib/types/pocketbase-types';
+	import type { LinkResponse, TagResponse } from '$lib/types';
 
 	interface ExpandedLinkResponse extends LinkResponse {
 		expand: {
@@ -15,9 +12,17 @@
 
 	interface PageData {
 		user_links: ExpandedLinkResponse[];
+		user_tags: TagResponse[];
 	}
 
 	const { data, form } = $props<{ data: PageData; form: any }>();
+
+	let selected_tags = $state<TagResponse[]>([]);
+
+	const handle_tags_change = (tags: TagResponse[]) => {
+		selected_tags = tags;
+		console.log('Selected tags:', tags);
+	};
 </script>
 
 <form method="POST" action="?/add_link" use:enhance>
@@ -37,12 +42,11 @@
 		required={true}
 		errors={form?.errors?.title}
 	/>
-	<Input
-		id="tags"
-		type="text"
-		label="Tags"
-		placeholder="Enter tags (comma separated)"
-		errors={form?.errors?.tags}
+	<Tags
+		existing_tags={data.user_tags}
+		on_tags_change={handle_tags_change}
+		placeholder="Enter tags..."
+		max_tags={5}
 	/>
 	<button type="submit" class="btn btn-primary">Add Link</button>
 </form>
