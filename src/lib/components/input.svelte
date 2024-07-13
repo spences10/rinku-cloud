@@ -22,16 +22,16 @@
 		required = false,
 		errors = [],
 		fontSize = 'text-base',
-		inputClasses = ''
+		inputClasses = '',
 	}: Props = $props();
 </script>
 
-<div class="form-control w-full max-w-lg mb-2">
-	<label for={id} class="label font-medium pb-1">
+<div class="form-control mb-2 w-full max-w-lg">
+	<label for={id} class="label pb-1 font-medium">
 		<span class="label-text {fontSize}">{label}</span>
 	</label>
 	<input
-		class="input rounded-lg w-full max-w-lg shadow-lg {fontSize} {inputClasses}"
+		class="input w-full max-w-lg rounded-lg shadow-lg {fontSize} {inputClasses}"
 		{type}
 		{id}
 		{placeholder}

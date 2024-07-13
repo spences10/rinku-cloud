@@ -1,7 +1,10 @@
 <script lang="ts">
 	import Link from '$lib/components/link.svelte';
-	import Input from '$lib/components/input.svelte';  // Import the custom Input component
-	import type { LinkResponse, TagResponse } from '$lib/types/pocketbase-types';
+	import Input from '$lib/components/input.svelte'; // Import the custom Input component
+	import type {
+		LinkResponse,
+		TagResponse,
+	} from '$lib/types/pocketbase-types';
 	import { enhance } from '$app/forms';
 
 	interface ExpandedLinkResponse extends LinkResponse {
@@ -14,11 +17,11 @@
 		user_links: ExpandedLinkResponse[];
 	}
 
-	const { data, form } = $props<{ data: PageData, form: any }>();
+	const { data, form } = $props<{ data: PageData; form: any }>();
 </script>
 
 <form method="POST" action="?/add_link" use:enhance>
-	<Input 
+	<Input
 		id="url"
 		type="url"
 		label="URL"
@@ -26,7 +29,7 @@
 		required={true}
 		errors={form?.errors?.url}
 	/>
-	<Input 
+	<Input
 		id="title"
 		type="text"
 		label="Title"
@@ -34,7 +37,7 @@
 		required={true}
 		errors={form?.errors?.title}
 	/>
-	<Input 
+	<Input
 		id="tags"
 		type="text"
 		label="Tags"

@@ -5,7 +5,7 @@ import type { Action, Actions } from './$types';
 
 const update_password: Action = async ({ request, locals }) => {
 	const data = Object.fromEntries(await request.formData());
-	
+
 	try {
 		await locals.pb.collection('users').update(locals.user.id, data);
 		locals.pb.authStore.clear();

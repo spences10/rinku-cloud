@@ -1,5 +1,8 @@
 <script lang="ts">
-	import type { LinkResponse, TagResponse } from '$lib/types/pocketbase-types';
+	import type {
+		LinkResponse,
+		TagResponse,
+	} from '$lib/types/pocketbase-types';
 
 	interface ExpandedLinkResponse extends LinkResponse {
 		expand?: {

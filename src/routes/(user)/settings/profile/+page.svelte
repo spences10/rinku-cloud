@@ -85,7 +85,7 @@
 				accept="image/*"
 				hidden
 				onchange={handle_avatar_change}
-        disabled={loading}
+				disabled={loading}
 			/>
 		</div>
 		<label for="bio" class="label pb-1 font-medium">

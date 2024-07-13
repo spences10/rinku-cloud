@@ -40,13 +40,13 @@ const update_username: Action = async ({ request, locals }) => {
 		if (e.status === 404) {
 			try {
 				let { username } = await locals.pb
-					.collection('users') 
-					.update(locals.user.id, { username:data?.username });
+					.collection('users')
+					.update(locals.user.id, { username: data?.username });
 				locals.user.username = username;
 				return {
 					success: true,
 					data: { username },
-				}; 
+				};
 			} catch (err) {
 				console.log(`Error: ${err}`);
 				error(e.status, e.data.message);
