@@ -89,7 +89,14 @@ const add_link: Action = async ({ request, locals }) => {
 					user: locals.user.id,
 				});
 			}
+
 			tag_ids.push(tag_obj.id);
+
+			// Create link_tag relationship
+			await locals.pb.collection('link_tag').create({
+				link_id: link.id,
+				tag_id: tag_obj.id,
+			});
 		}
 
 		// Update the link with the tag relations

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Link from '$lib/components/link.svelte';
-	import Input from '$lib/components/input.svelte'; // Import the custom Input component
+	import { enhance } from '$app/forms';
+	import { Input, Link } from '$lib/components';
+
 	import type {
 		LinkResponse,
 		TagResponse,
 	} from '$lib/types/pocketbase-types';
-	import { enhance } from '$app/forms';
 
 	interface ExpandedLinkResponse extends LinkResponse {
 		expand: {
