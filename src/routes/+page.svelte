@@ -22,7 +22,6 @@
 
 	const handle_tags_change = (tags: Tag[]) => {
 		selected_tags = tags;
-		console.log('Selected tags:', tags);
 	};
 
 	let filtered_links = $derived.by(() => {
@@ -37,6 +36,8 @@
 		);
 	});
 </script>
+
+<a href="/network" class="link link-primary">Network Visualization</a>
 
 <form method="POST" action="?/add_link" use:enhance>
 	<Input
@@ -61,7 +62,10 @@
 		placeholder="Enter tags..."
 		max_tags={5}
 	/>
-	<button type="submit" class="btn btn-primary rounded-box shadow-lg mb-8">
+	<button
+		type="submit"
+		class="btn btn-primary mb-8 rounded-box shadow-lg"
+	>
 		Add Link
 	</button>
 </form>

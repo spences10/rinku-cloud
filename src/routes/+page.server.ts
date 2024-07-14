@@ -52,8 +52,6 @@ const add_link: Action = async ({ request, locals }) => {
 	const title = form_data.get('title') as string;
 	const tags = form_data.get('tags') as string;
 
-	console.log('Received form data:', { url, title, tags });
-
 	const errors: Record<string, string> = {};
 
 	if (!url) errors.url = 'URL is required';
@@ -71,11 +69,8 @@ const add_link: Action = async ({ request, locals }) => {
 			user: locals.user.id,
 		});
 
-		console.log('Created link:', link);
-
 		// Handle tags
 		const tag_data = tags ? tags.split(',') : [];
-		console.log('Received tag data:', tag_data);
 
 		const final_tag_ids = [];
 
@@ -86,7 +81,6 @@ const add_link: Action = async ({ request, locals }) => {
 					// This is an existing tag, extract the ID
 					const tag_id = tag_item.split(':')[1];
 					tag = await locals.pb.collection('tag').getOne(tag_id);
-					console.log('Found existing tag:', tag);
 				} else if (tag_item.startsWith('new:')) {
 					// This is a new tag, create it
 					const tag_name = tag_item.split(':')[1];
@@ -94,7 +88,6 @@ const add_link: Action = async ({ request, locals }) => {
 						name: tag_name,
 						user: locals.user.id,
 					});
-					console.log('Created new tag:', tag);
 				} else {
 					console.error(`Invalid tag format: ${tag_item}`);
 					continue;
@@ -108,9 +101,6 @@ const add_link: Action = async ({ request, locals }) => {
 						link_id: link.id,
 						tag_id: tag.id,
 					});
-					console.log(
-						`Created link_tag relationship for tag ${tag.id}`
-					);
 				}
 			} catch (err) {
 				console.error(`Error processing tag ${tag_item}:`, err);
@@ -119,11 +109,6 @@ const add_link: Action = async ({ request, locals }) => {
 
 		// Update the link with the tag relations
 		await locals.pb.collection('link').update(link.id, {
-			tags: final_tag_ids,
-		});
-
-		console.log('Updated link with tags:', {
-			link_id: link.id,
 			tags: final_tag_ids,
 		});
 
