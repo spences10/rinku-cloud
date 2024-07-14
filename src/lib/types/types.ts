@@ -1,4 +1,8 @@
-import type { TagResponse } from './pocketbase-types';
+import type {
+	LinkResponse,
+	RecordIdString,
+	TagResponse,
+} from './pocketbase-types';
 
 export type NewTag = {
 	id: string;
@@ -7,3 +11,11 @@ export type NewTag = {
 };
 
 export type Tag = TagResponse | NewTag;
+
+export interface ExpandedLinkResponse
+	extends Omit<LinkResponse, 'tags' | 'expand'> {
+	tags: RecordIdString[];
+	expand?: {
+		tags: TagResponse[];
+	};
+}
