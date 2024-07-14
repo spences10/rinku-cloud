@@ -11,7 +11,7 @@ const update_email: Action = async ({ request, locals }) => {
 			.collection('users')
 			.requestEmailChange(data?.email.toString());
 	} catch (err) {
-		console.log(`Error: ${err}`);
+		console.error(`Error: ${err}`);
 		const e = err as ClientResponseError;
 		error(e.status, e.data.message);
 	}
@@ -48,11 +48,11 @@ const update_username: Action = async ({ request, locals }) => {
 					data: { username },
 				};
 			} catch (err) {
-				console.log(`Error: ${err}`);
+				console.error(`Error: ${err}`);
 				error(e.status, e.data.message);
 			}
 		}
-		console.log(`Error: ${err}`);
+		console.error(`Error: ${err}`);
 		error(e.status, e.data.message);
 	}
 

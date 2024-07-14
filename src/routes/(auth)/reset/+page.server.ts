@@ -12,7 +12,7 @@ export const actions: Actions = {
 				.requestPasswordReset(body.email as string);
 			return { success: true };
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 			error(500, 'something went wrong');
 		}
 	},

@@ -24,7 +24,7 @@ const update_profile: Action = async ({ locals, request }) => {
 		locals.user.avatar = avatar;
 		locals.user.bio = bio;
 	} catch (err) {
-		console.log(`Error: ${err}`);
+		console.error(`Error: ${err}`);
 		error(500, 'Something went wrong updating profile');
 	}
 	return {

@@ -10,7 +10,7 @@ const update_password: Action = async ({ request, locals }) => {
 		await locals.pb.collection('users').update(locals.user.id, data);
 		locals.pb.authStore.clear();
 	} catch (err) {
-		console.log(`Error: ${err}`);
+		console.error(`Error: ${err}`);
 		const e = err as ClientResponseError;
 		error(e.status, e.data.message);
 	}
