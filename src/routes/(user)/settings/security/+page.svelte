@@ -63,7 +63,7 @@
 			</a>
 			<button
 				type="submit"
-				class="btn btn-primary mt-4 block"
+				class="btn btn-primary mt-4 block rounded-box shadow-lg"
 				disabled={loading}
 			>
 				Confirm

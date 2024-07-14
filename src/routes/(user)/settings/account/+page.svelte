@@ -70,7 +70,7 @@
 			/>
 			<button
 				type="submit"
-				class="btn btn-primary"
+				class="btn btn-primary rounded-box shadow-lg"
 				disabled={loading}
 			>
 				Confirm
@@ -102,7 +102,7 @@
 			/>
 			<button
 				type="submit"
-				class="btn btn-primary"
+				class="btn btn-primary rounded-box shadow-lg"
 				disabled={loading}
 			>
 				Confirm

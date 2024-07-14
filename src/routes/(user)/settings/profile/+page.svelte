@@ -98,7 +98,6 @@
 			value={form?.data?.name ?? data?.name}
 			disabled={loading}
 			errors={form?.errors?.name}
-			inputClasses="input-bordered"
 		/>
 		<div>
 			<label for="bio" class="label pb-1 font-medium">
@@ -107,7 +106,7 @@
 		</div>
 		<textarea
 			name="bio"
-			class="textarea textarea-bordered mt-0 h-24 w-full max-w-lg resize-none text-base"
+			class="textarea mt-0 h-24 w-full resize-none rounded-box border border-dotted border-secondary text-base shadow-lg"
 			disabled={loading}
 			value={form?.data?.bio ?? data?.bio}
 		></textarea>
@@ -118,11 +117,11 @@
 				</label>
 			{/each}
 		{/if}
-		<div class="form-control w-full max-w-lg">
+		<div class="form-control w-full">
 			<input
 				type="submit"
 				value="Update profile"
-				class="btn btn-primary mt-6"
+				class="btn btn-primary mt-6 rounded-box shadow-lg"
 				disabled={loading}
 			/>
 		</div>

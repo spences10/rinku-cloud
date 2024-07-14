@@ -8,8 +8,8 @@
 		disabled?: boolean;
 		required?: boolean;
 		errors?: string[];
-		fontSize?: string;
-		inputClasses?: string;
+		font_size?: string;
+		input_classes?: string;
 	}
 
 	let {
@@ -21,17 +21,17 @@
 		disabled = false,
 		required = false,
 		errors = [],
-		fontSize = 'text-base',
-		inputClasses = '',
+		font_size = 'text-base',
+		input_classes = '',
 	}: Props = $props();
 </script>
 
-<div class="form-control mb-2 w-full max-w-lg">
+<div class="form-control mb-2 w-full">
 	<label for={id} class="label pb-1 font-medium">
-		<span class="label-text {fontSize}">{label}</span>
+		<span class="label-text {font_size}">{label}</span>
 	</label>
 	<input
-		class="input w-full max-w-lg rounded-lg shadow-lg {fontSize} {inputClasses}"
+		class="input w-full rounded-box border border-dotted border-secondary shadow-lg {font_size} {input_classes}"
 		{type}
 		{id}
 		{placeholder}

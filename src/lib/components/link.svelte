@@ -15,7 +15,9 @@
 	let display_tags = $derived(link.expand?.tags ?? []);
 </script>
 
-<div class="card mb-4 w-full bg-base-100 shadow-xl">
+<div
+	class="mb-8 w-full rounded-box border border-dotted border-secondary bg-base-100 shadow-lg"
+>
 	<div class="card-body">
 		<a href={link.url}>
 			<h2 class="card-title text-3xl">{link.title}</h2>

@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { Input } from '$lib/components';
 	import { Error } from '$lib/icons';
 
-	const { form } = $props();
+	const { form } = $props<{ form: FormData }>();
 </script>
 
 <h1>Sign in</h1>
@@ -15,35 +16,31 @@
 	class="flex max-w-xl flex-col justify-center gap-4 px-10 py-10 lg:px-16"
 >
 	<div class="form-control">
-		<label for="email" class="label">
-			<span class="label-text">Email</span>
-		</label>
-		<input
-			type="email"
-			placeholder="me@example.com"
-			name="email"
+		<Input
 			id="email"
-			class="input input-bordered"
+			type="email"
+			label="Email"
+			placeholder="me@example.com"
+			required={true}
+			errors={form?.errors?.email}
 		/>
 	</div>
 
 	<div class="form-control">
-		<label for="password" class="label">
-			<span class="label-text">Password</span>
-		</label>
-		<input
-			type="password"
-			placeholder="🤫"
-			name="password"
+		<Input
 			id="password"
-			class="input input-bordered"
+			type="password"
+			label="Password"
+			placeholder="🤫"
+			required={true}
+			errors={form?.errors?.password}
 		/>
 	</div>
 
 	<p>
-		Forgot your password? <a href="/reset" class="link link-primary"
-			>Reset it</a
-		>
+		Forgot your password? <a href="/reset" class="link link-primary">
+			Reset it
+		</a>
 	</p>
 	{#if form?.notVerified}
 		<div role="alert" class="alert alert-error">
@@ -51,5 +48,7 @@
 			<span>Verify your email address before signing in.</span>
 		</div>
 	{/if}
-	<button type="submit" class="btn btn-neutral">Sign in</button>
+	<button type="submit" class="btn btn-primary rounded-box shadow-lg">
+		Sign in
+	</button>
 </form>

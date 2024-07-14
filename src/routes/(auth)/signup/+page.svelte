@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { Input } from '$lib/components';
+
+	const { form } = $props<{ form: FormData }>();
 </script>
 
 <h1>Sign up</h1>
@@ -11,70 +14,51 @@
 	use:enhance
 	class="flex max-w-xl flex-col justify-center gap-4 px-10 py-10 lg:px-16"
 >
-	<div class="form-control">
-		<label for="username" class="label">
-			<span class="label-text">Username</span>
-		</label>
-		<input
-			type="text"
-			placeholder="username"
-			name="username"
-			id="username"
-			class="input input-bordered"
-		/>
-	</div>
+	<Input
+		id="username"
+		type="text"
+		label="Username"
+		placeholder="Username"
+		required={true}
+		errors={form?.errors?.username}
+	/>
+	<Input
+		id="email"
+		type="email"
+		label="Email"
+		placeholder="me@example.com"
+		required={true}
+		errors={form?.errors?.email}
+	/>
 
-	<div class="form-control">
-		<label for="email" class="label">
-			<span class="label-text">Email</span>
-		</label>
-		<input
-			type="email"
-			placeholder="me@example.com"
-			name="email"
-			id="email"
-			class="input input-bordered"
-		/>
-	</div>
+	<Input
+		id="password"
+		type="password"
+		label="Password"
+		placeholder="🤫"
+		required={true}
+		errors={form?.errors?.password}
+	/>
 
-	<div class="form-control">
-		<label for="password" class="label">
-			<span class="label-text">Password</span>
-		</label>
-		<input
-			type="password"
-			placeholder="🤫"
-			name="password"
-			id="password"
-			class="input input-bordered"
-		/>
-	</div>
+	<Input
+		id="passwordConfirm"
+		type="password"
+		label="Confirm Password"
+		placeholder=""
+		required={true}
+		errors={form?.errors?.passwordConfirm}
+	/>
 
-	<div class="form-control">
-		<label for="passwordConfirm" class="label">
-			<span class="label-text">Password Confirm</span>
-		</label>
-		<input
-			type="passwordConfirm"
-			placeholder=""
-			name="passwordConfirm"
-			id="passwordConfirm"
-			class="input input-bordered"
-		/>
-	</div>
+	<Input
+		id="name"
+		type="text"
+		label="Your Name"
+		placeholder="Your Name"
+		required={false}
+		errors={form?.errors?.name}
+	/>
 
-	<div class="form-control">
-		<label for="name" class="label">
-			<span class="label-text">Your Name</span>
-		</label>
-		<input
-			type="name"
-			placeholder=""
-			name="name"
-			id="name"
-			class="input input-bordered"
-		/>
-	</div>
-
-	<button type="submit" class="btn btn-neutral">Continue</button>
+	<button type="submit" class="btn btn-primary rounded-box shadow-lg">
+		Continue
+	</button>
 </form>

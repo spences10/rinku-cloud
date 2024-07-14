@@ -111,26 +111,34 @@
 	});
 </script>
 
-<div class="tag-input-container">
-	<div class="tags-container">
+<div class="form-control mb-4">
+	<label for="tags" class="label pb-1 font-medium">
+		<span class="label-text text-base">Tags</span>
+	</label>
+	<div
+		class="flex rounded-box border border-dotted border-secondary p-[11px] align-top shadow-lg"
+	>
 		{#each tags as tag, index}
-			<span class="tag">
+			<span
+				class="badge badge-primary mb-0 mr-1 flex justify-between"
+			>
 				{tag.name}
 				<button
 					type="button"
-					class="remove-tag"
-					onclick={() => remove_tag(index)}>×</button
+					class="cursor-pointer pb-2 text-xs hover:text-warning"
+					onclick={() => remove_tag(index)}>&times;</button
 				>
 			</span>
 		{/each}
+		<input
+			type="text"
+			id="tags"
+			bind:value={input_value}
+			onkeydown={handle_keydown}
+			{placeholder}
+			class="w-20 bg-base-100 outline-0"
+		/>
 	</div>
-	<input
-		type="text"
-		bind:value={input_value}
-		onkeydown={handle_keydown}
-		{placeholder}
-		class="tag-input"
-	/>
 	<input
 		type="hidden"
 		name="tags"
@@ -155,53 +163,8 @@
 	{/if}
 </div>
 
-<style>
+<!-- <style>
 	* {
 		outline: 1px solid red !important;
 	}
-	.tag-input-container {
-		border: 1px solid #ccc;
-		padding: 5px;
-		border-radius: 4px;
-	}
-	.tags-container {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 5px;
-		margin-bottom: 5px;
-	}
-	.tag {
-		background-color: #e0e0e0;
-		padding: 2px 5px;
-		border-radius: 3px;
-		display: flex;
-		align-items: center;
-	}
-	.remove-tag {
-		background: none;
-		border: none;
-		cursor: pointer;
-		margin-left: 5px;
-	}
-	.tag-input {
-		width: 100%;
-		border: none;
-		outline: none;
-		padding: 5px;
-	}
-	.suggestions {
-		list-style-type: none;
-		padding: 0;
-		margin: 5px 0 0 0;
-		border: 1px solid #ccc;
-		max-height: 150px;
-		overflow-y: auto;
-	}
-	.suggestions li {
-		padding: 5px;
-		cursor: pointer;
-	}
-	.suggestions li.focused {
-		background-color: #f0f0f0;
-	}
-</style>
+</style> -->

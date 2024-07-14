@@ -15,14 +15,27 @@
 		user_tags: TagResponse[];
 	}
 
-	const { data, form } = $props<{ data: PageData; form: any }>();
+	const { data, form } = $props<{ data: PageData; form: FormData }>();
 
 	let selected_tags = $state<Tag[]>([]);
+	let search_term = $state('');
 
 	const handle_tags_change = (tags: Tag[]) => {
 		selected_tags = tags;
 		console.log('Selected tags:', tags);
 	};
+
+	let filtered_links = $derived.by(() => {
+		const search_lower = search_term.toLowerCase();
+		return data.user_links.filter(
+			(link: ExpandedLinkResponse) =>
+				link.title.toLowerCase().includes(search_lower) ||
+				link.url.toLowerCase().includes(search_lower) ||
+				link.expand.tags.some((tag: TagResponse) =>
+					tag.name.toLowerCase().includes(search_lower)
+				)
+		);
+	});
 </script>
 
 <form method="POST" action="?/add_link" use:enhance>
@@ -48,13 +61,32 @@
 		placeholder="Enter tags..."
 		max_tags={5}
 	/>
-	<button type="submit" class="btn btn-primary">Add Link</button>
+	<button type="submit" class="btn btn-primary rounded-box shadow-lg mb-8">
+		Add Link
+	</button>
 </form>
 
 {#if form?.error}
 	<p class="error">{form.error}</p>
 {/if}
 
-{#each data.user_links as link}
-	<Link {link} />
-{/each}
+<div class="mb-8">
+	<label for="search" class="label pb-1 font-medium">
+		<span class="label-text text-base">Search</span>
+	</label>
+	<input
+		type="text"
+		id="search"
+		bind:value={search_term}
+		placeholder="Search links..."
+		class="input w-full rounded-box border-dotted border-secondary shadow-lg"
+	/>
+</div>
+
+{#if filtered_links.length === 0}
+	<p>No matching links found.</p>
+{:else}
+	{#each filtered_links as link}
+		<Link {link} />
+	{/each}
+{/if}
