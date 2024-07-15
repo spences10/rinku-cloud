@@ -70,7 +70,6 @@
 		data.user_links,
 		data.user_tags
 	);
-	console.log(graph_data);
 </script>
 
 <h1 class="mb-4 text-2xl font-bold">Network Visualization</h1>

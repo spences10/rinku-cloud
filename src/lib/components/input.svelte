@@ -43,7 +43,7 @@
 	{#if errors}
 		{#each errors as error}
 			<label for={id} class="label pb-0">
-				<span class="label-text-alt text-warning">{error}</span>
+				<span class="label-text-alt text-error font-bold">{error}</span> 
 			</label>
 		{/each}
 	{/if}
