@@ -36,8 +36,8 @@ devDependencies:
     specifier: ^3.0.8
     version: 3.0.8
   '@types/eslint':
-    specifier: ^8.56.10
-    version: 8.56.10
+    specifier: ^9.6.0
+    version: 9.6.0
   autoprefixer:
     specifier: ^10.4.19
     version: 10.4.19(postcss@8.4.39)
@@ -85,7 +85,7 @@ devDependencies:
     version: 3.2.5(prettier@3.3.3)(svelte@5.0.0-next.184)
   prettier-plugin-tailwindcss:
     specifier: ^0.6.5
-    version: 0.6.5(prettier-plugin-svelte@3.2.5)(prettier@3.3.3)
+    version: 0.6.5(prettier-plugin-svelte@3.2.6)(prettier@3.3.3)
   svelte:
     specifier: 5.0.0-next.184
     version: 5.0.0-next.184
@@ -738,8 +738,8 @@ packages:
       '@types/d3-selection': 3.0.10
     dev: true
 
-  /@types/eslint@8.56.10:
-    resolution: {integrity: sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==}
+  /@types/eslint@9.6.0:
+    resolution: {integrity: sha512-gi6WQJ7cHRgZxtkQEoyHMppPjq9Kxo5Tjn2prSKDSmZrCz8TZ3jSRCeTJm+WoM+oB0WG37bRqLzaaU3q7JypGg==}
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
@@ -1462,7 +1462,7 @@ packages:
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0-0 || ^9.0.0-0
-      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.181
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.191
     peerDependenciesMeta:
       svelte:
         optional: true
@@ -2417,7 +2417,7 @@ packages:
       svelte: 5.0.0-next.184
     dev: true
 
-  /prettier-plugin-tailwindcss@0.6.5(prettier-plugin-svelte@3.2.5)(prettier@3.3.3):
+  /prettier-plugin-tailwindcss@0.6.5(prettier-plugin-svelte@3.2.6)(prettier@3.3.3):
     resolution: {integrity: sha512-axfeOArc/RiGHjOIy9HytehlC0ZLeMaqY09mm8YCkMzznKiDkwFzOpBvtuhuv3xG5qB73+Mj7OCe2j/L1ryfuQ==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -2748,7 +2748,7 @@ packages:
     resolution: {integrity: sha512-M+v1HhC5T1WKYVxWexUCS4o6oIBS88XKzOZuhl2ew+eGxol7eC21e+VE8TC4rXJ3iT3iXT0qlZsZcpKjVo5/zQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
-      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.181
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.191
     peerDependenciesMeta:
       svelte:
         optional: true
