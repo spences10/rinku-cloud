@@ -37,7 +37,7 @@ devDependencies:
     version: 3.0.8
   '@types/eslint':
     specifier: ^9.6.0
-    version: 9.6.0
+    version: 9.6.1
   autoprefixer:
     specifier: ^10.4.19
     version: 10.4.20(postcss@8.4.40)
@@ -738,8 +738,8 @@ packages:
       '@types/d3-selection': 3.0.10
     dev: true
 
-  /@types/eslint@9.6.0:
-    resolution: {integrity: sha512-gi6WQJ7cHRgZxtkQEoyHMppPjq9Kxo5Tjn2prSKDSmZrCz8TZ3jSRCeTJm+WoM+oB0WG37bRqLzaaU3q7JypGg==}
+  /@types/eslint@9.6.1:
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
