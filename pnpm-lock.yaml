@@ -58,7 +58,7 @@ devDependencies:
     version: 3.0.0
   daisyui:
     specifier: ^4.12.10
-    version: 4.12.11(postcss@8.4.47)
+    version: 4.12.13(postcss@8.4.47)
   eslint:
     specifier: ^9.10.0
     version: 9.12.0
@@ -1347,8 +1347,8 @@ packages:
       d3-transition: 3.0.1(d3-selection@3.0.0)
     dev: true
 
-  /daisyui@4.12.11(postcss@8.4.47):
-    resolution: {integrity: sha512-D9OJTlnU1ATiDsKkw5/TB0997Hm73zu9SFeUTthDtKd06OEJQlOLoYrGXlP2YhHZDW4VAcQnmhEphTgPFUYqSw==}
+  /daisyui@4.12.13(postcss@8.4.47):
+    resolution: {integrity: sha512-BnXyQoOByUF/7wSdIKubyhXxbtL8gxwY3u2cNMkxGP39TSVJqMmlItqtpY903fQnLI/NokC+bc+ZV+PEPsppPw==}
     engines: {node: '>=16.9.0'}
     dependencies:
       css-selector-tokenizer: 0.8.0
